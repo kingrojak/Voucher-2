@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runaway Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FF6600; /* Warna oren Shopee */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            position: relative;
+            width: 350px;
+            height: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 30px; /* Jarak dengan butang */
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Susun butang kiri & kanan */
+            align-items: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+        }
+        #yesButton {
+            background-color: #28a745;
+            color: white;
+        }
+        #noButton {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sila Tekan "Ya" Untuk Menerima Voucer Shopee Bernilai RM100</h2>
+        <div class="button-container">
+            <button id="noButton" onclick="alert('Baiklah! Mungkin Lain Kali 😊')">Tidak Berminat</button>
+            <button id="yesButton">Ya</button>
+        </div>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById("yesButton");
+        const container = document.querySelector(".container");
+        let clickCount = 0;
+
+        yesButton.addEventListener("click", () => {
+            clickCount++;
+            if (clickCount >= 5) {
+                yesButton.style.display = "none"; // Hilang selepas 5 kali klik
+            } else {
+                let newSize = 18 - clickCount * 3; // Mengecil setiap kali klik
+                yesButton.style.fontSize = newSize + "px";
+                yesButton.style.padding = (10 - clickCount * 2) + "px " + (20 - clickCount * 4) + "px";
+            }
+        });
+
+        yesButton.addEventListener("mouseover", () => {
+            const maxX = container.clientWidth - yesButton.clientWidth;
+            const maxY = container.clientHeight - yesButton.clientHeight;
+
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            yesButton.style.position = "absolute";
+            yesButton.style.left = `${newX}px`;
+            yesButton.style.top = `${newY}px`;
+        });
+    </script>
+</body>
+</html><ALOASK-SEPARATE-EDITORS><ALOASK-SEPARATE-EDITORS>
